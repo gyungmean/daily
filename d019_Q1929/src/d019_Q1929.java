@@ -6,26 +6,26 @@ public class d019_Q1929 {
 		int M = sc.nextInt();
 		int N = sc.nextInt();
 		
-		int prime = M;
-		while(prime <= N) {
-			if(check(prime)) {
-				System.out.println(prime);
+		int[] prime = new int[N + 1];
+		
+		for(int i = 2; i <= N; i++) {
+			prime[i] = i;
+		}//0과 1은 소수가 아니다.
+		
+		for(int i = 2; i <= N; i++) {
+			if(prime[i] == 0) {continue;}
+			for(int j = 2 * i; j <= N; j += i ) {
+				prime[j] = 0;
 			}
-			prime++;
 		}
-		sc.close();
+		
+		for(int i = M; i <= N; i++) {
+			if(prime[i] != 0) {
+				System.out.println(prime[i]);
+			}
+		}
 
-	}
-	
-	public static boolean check(int n) {
-		int i = 2;
-		if(n == 0 || n == 1) {return false;}
-		while(i < n) {
-			if(n % i++ == 0) {
-				return false;
-			}
-		}
-		return true;
+		sc.close();
 	}
 
 }
